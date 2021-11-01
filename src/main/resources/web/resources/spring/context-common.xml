@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:util="http://www.springframework.org/schema/util"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+	   					   http://www.springframework.org/schema/beans/spring-beans.xsd
+          				   http://www.springframework.org/schema/context 
+          				   http://www.springframework.org/schema/context/spring-context.xsd
+          				   http://www.springframework.org/schema/util
+          				   http://www.springframework.org/schema/util/spring-util-3.2.xsd">
+	
+	<!-- Common 설정
+		기타 스프링, 커스텀 모듈 로딩 및 DI 설정
+		이파일에서 컨트롤러 이외의 Component를 로딩 시키고, 스프링 컨테이너로 로딩시킬 bean들을 정의한다.
+	-->
+	
+	
+	<!-- @Controller 어노테이션을 제외한 Component Bean 생성 -->
+	<context:component-scan base-package="web.rest">
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+	</context:component-scan>
+
+
+	<!-- Properties Bean 생성 -->
+	<bean id="config" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+		<property name="locations"> 
+			<list>
+				<value>classpath:/web/resources/properties/config.xml</value> 
+				<value>classpath:/web/resources/properties/com_config.xml</value> 
+			</list>
+		</property>		
+	</bean>	
+
+	
+	<!-- MessageSource Bean 생성 -->
+	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="defaultEncoding" value="UTF-8" />
+		<property name="cacheSeconds" value="60" />
+		<property name="basenames">
+			<!-- 
+				사용할 메시지 파일을  리스트  추가
+				ENG_COM_CODE_DT 테이블 MSG_CODE_DIV로 code 분류
+			 -->
+			<list>
+				<value>classpath:/web/resources/message/code</value>
+				
+				<value>classpath:/web/resources/message/code1000</value>
+				<value>classpath:/web/resources/message/code2000</value>
+				<value>classpath:/web/resources/message/code3000</value>
+				
+				<value>classpath:/web/resources/message/code6000</value>
+				<value>classpath:/web/resources/message/code7000</value>
+				<value>classpath:/web/resources/message/code8000</value>
+				<value>classpath:/web/resources/message/code9000</value>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
+		<property name="defaultLocale" value="ko" />
+	</bean>
+	
+	
+	<!--
+	TODO 다국어 처리 
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/{path}" />
+			<bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+			    <property name="paramName" value="lang" />
+			</bean>	 	
+		</mvc:interceptor>
+	</mvc:interceptors>
+	
+	<bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
+	    <property name="defaultLocale" value="en" />
+	</bean>	 
+	<bean id="handlerMapping" class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping">
+	    <property name="interceptors">
+	        <ref bean="localeChangeInterceptor" />
+	    </property>
+	</bean>
+	 -->
+
+	<!-- 업로드 경로 -->
+    <util:map id="uploadKeys" map-class="java.util.HashMap">
+    	<entry key="default" value="D:/" />
+        <entry key="board" value="D:/board/" />
+    </util:map>	
+	
+</beans>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+    <comment>[영문] 계정 관련 코드 메시지</comment>
+    
+    <entry key="2000">The {0} account cannot be locked.</entry>
+    <entry key="2001">The {0} account cannot be unlocked.</entry>
+    <entry key="2002">The {0} account cannot change the password.</entry>
+    <entry key="2003">The {0} account is an abnormal account that cannot be registered.</entry>
+    <entry key="2004">Accounts waiting to be deleted can only be unlocked.</entry>
+    <entry key="2005">Accounts with protocols cannot be deleted.</entry>
+    <entry key="2006">The account that has been deleted.</entry>
+</properties>

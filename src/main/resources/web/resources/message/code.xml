@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+    <comment>Code Message Common</comment>
+    <entry key="200">정상</entry>
+    <entry key="400">요청정보 오류입니다.  </entry>
+    <entry key="401">로그인이 필요한 서비스입니다.</entry>
+    <entry key="403">접근 권한이 없습니다.</entry>
+    <entry key="404">페이지가 존재하지 않습니다.</entry>
+    <entry key="500">시스템 오류가 발생하였습니다.</entry>
+    <entry key="505">[{0}] 에러 테스트.</entry>
+    
+    <entry key="510">로그인에 실패했습니다. {0}</entry>
+    <entry key="511">로그인 정보가 잘못되었거나 존재하지 않는 사용자입니다.</entry>
+    <entry key="512">비밀번호가 일치하지 않습니다. 비밀번호를 확인해주세요.</entry>
+    <entry key="513">재직중이 아닌 사용자 입니다. 관리자에게 문의하세요.</entry>
+    <entry key="514">사용자 생성 신청 진행중 입니다.</entry>
+    <entry key="515">사용자 생성 선청이  반려 되었습니다.</entry>
+    <entry key="516">허용되지 않은 IP 입니다.</entry>
+    <entry key="517">로그인에 {0}회 실패했습니다. {1}분 후에 로그인 가능합니다.</entry>
+    <entry key="518">로그인에 {0}회 실패하여 사용자가 잠겼습니다. 사용자 잠금 해제는 관리자에게 문의하세요.</entry>
+    <entry key="519">포탈관리자가 아닙니다. 일반사용자는 로그인 하실 수 없습니다.</entry>
+    <entry key="520">사용이 잠긴 사용자 입니다. 사용자 잠금해제는 관리자에게 문의하세요.</entry>
+    <entry key="521">사용자 사용 권한이 회수되었습니다.</entry>
+    <entry key="522">사용 기간 시작일이 되지 않았습니다.</entry>
+    
+    <entry key="530">계정상태가 이미 Lock 설정된 계정입니다.</entry>
+    <entry key="531">계정상태가 이미 Lock 해제된 상태입니다.</entry>
+    
+    <entry key="550">입력된 사용자 아이디가 없습니다.</entry>
+    <entry key="551">2차 인증 방식을 선택하지 않았습니다.</entry>
+    <entry key="553">사용자 이메일 주소가 없습니다.</entry>
+    <entry key="554">사용자 핸드폰번호가 없습니다.</entry>
+    <entry key="555">잘못된 인증 방식입니다.</entry>
+    <entry key="556">사용자 정보를 잘못 입력하였습니다.</entry>
+    <entry key="560">인증코드가 일치하지 않습니다.</entry>
+    <entry key="561">사용자가 OTP에 가입하지 않았습니다.</entry>
+    <entry key="562">최초 로그인 사용자 입니다. 비밀번호를 변경하여 주세요.</entry>
+    <entry key="563">비밀번호 사용 만료일이 초과하였습니다. 비밀번호를 변경하여 주세요.</entry>
+    <entry key="564">계정 사용 만료일이 초과하였습니다. 연장 신청을 하여 주세요.</entry>
+    <entry key="565">해당 사용자가 PM 관리자가 아닙니다.</entry>
+    <entry key="566">해당 PM관리자에 속한 사용자가 없습니다.</entry>
+    <entry key="567">해당 사용자가 이미 PM 위임 상태입니다. 회수를 먼저 해주세요.</entry>
+    <entry key="568">변경/위임 받으려는 사용자가 다른 PM관리자에게 위임받은 상태입니다.</entry>
+    <entry key="569">PM 관리자 지정은 내부직원만 가능합니다.</entry>
+    
+    <entry key="570">계정 사용권한이 이미 회수된 사용 계정입니다.</entry>
+    <entry key="571">계정 사용권한이 이미 부여된 사용 계정입니다.</entry>
+    <entry key="572">PM 관리자 위임은 한명만 위임할 수 있습니다.</entry>
+    
+    <entry key="580">사용자 아이디가 없습니다.</entry>
+    <entry key="581">비밀번호 초기화에 실패했습니다.</entry>
+    <entry key="582">사용자 비밀번호가 맞지않습니다..</entry>
+    
+    <entry key="600">[{0}] 필수 입니다.  </entry>
+    <entry key="610">[{0}] 숫자만 가능합니다.</entry>
+    <entry key="611">[{0}] 최소 {1}이상만 가능합니다.</entry>
+    <entry key="612">[{0}] 최대 {1}이하만 가능합니다.</entry>
+    <entry key="613">[{0}] {1} ~ {2}만 가능합니다.</entry>
+    <entry key="620">[{0}] 최소 {1}자리 이상만 가능합니다.</entry>
+    <entry key="621">[{0}] 최대 {1}자리 이하만 가능합니다.</entry>
+    <entry key="622">[{0}] {1} ~ {2}자리만 가능합니다.</entry>
+    <entry key="630">[{0}] 날짜({1})만 가능합니다.</entry>
+    <entry key="640">[{0}] 패턴이 일치하지 않습니다.</entry>
+
+    <entry key="700">로그인 정보가 존재하지 않습니다.</entry>
+    <entry key="701">다른 기기에서 접속하여 세션이 종료되었습니다.</entry>
+    <entry key="702">비정상 요청으로 인해 로그아웃 됩니다.</entry>
+    <entry key="703">더 이상 중복접속이 불가능합니다. 로그인 정보를 확인해주세요.</entry>
+    
+    <!-- HistoryUtil 에서 사용 -->
+    <entry key="800">[이전 데이터 ] : {0}  [수정 데이터] : {1}</entry>    
+</properties>

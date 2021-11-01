@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans 
+						   http://www.springframework.org/schema/beans/spring-beans.xsd
+						   http://www.springframework.org/schema/jdbc  
+						   http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
+						   http://www.springframework.org/schema/context 
+      					   http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- Datasource 설정
+		프로젝트에서 사용 할 DataSource를 생성 및 옵션 설정 
+	-->
+	
+
+	<!-- XML에서 properties 파일을 사용할 수 있도록 설정 -->
+	<context:property-placeholder location="classpath:/web/resources/properties/config.xml" />
+
+
+	<!-- Work BasicDataSource Bean 생성 -->
+	<bean id="dataSourceSpied" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="${db1.driver}" />
+		<property name="url" value="${db1.url}" />
+		<property name="username" value="${db1.username}" />
+		<property name="password" value="${db1.password}" />
+
+		<!-- connection pool setting -->
+		<property name="initialSize" value="${db1.initialSize}" />	 
+		<property name="maxTotal" value="${db1.maxTotal}"/> 
+		<property name="maxIdle" value="${db1.maxIdle}"/>
+		<property name="minIdle" value="${db1.minIdle}"/> 
+		
+		<!-- preparedStatement pool setting --> 
+		<!-- <property name="poolPreparedStatements" value="true"/> 
+		<property name="maxOpenPreparedStatements" value="50"/> -->
+	</bean>
+	
+	<!-- logging을 적용한 DataSource 생성 -->
+	<bean id="dataSource" class="net.sf.log4jdbc.sql.jdbcapi.DataSourceSpy">
+		<constructor-arg ref="dataSourceSpied"/>
+	</bean>
+	
+	
+	
+	<!-- Admin BasicDataSource Bean 생성 -->
+	<bean id="adminDataSourceSpied" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="${db2.driver}" />
+		<property name="url" value="${db2.url}" />
+		<property name="username" value="${db2.username}" />
+		<property name="password" value="${db2.password}" />
+
+		<!-- connection pool setting -->
+		<property name="initialSize" value="${db2.initialSize}" />	 
+		<property name="maxTotal" value="${db2.maxTotal}"/> 
+		<property name="maxIdle" value="${db2.maxIdle}"/>
+		<property name="minIdle" value="${db2.minIdle}"/> 
+		
+		<!-- preparedStatement pool setting --> 
+		<!-- <property name="poolPreparedStatements" value="true"/> 
+		<property name="maxOpenPreparedStatements" value="50"/> -->
+	</bean>
+	
+	<!-- logging을 적용한 DataSource 생성 -->
+	<bean id="adminDataSource" class="net.sf.log4jdbc.sql.jdbcapi.DataSourceSpy">
+		<constructor-arg ref="adminDataSourceSpied"/>
+	</bean>
+	
+	
+	
+	<!-- 모든 정보 로깅 -->
+	<!-- 
+	<bean id="dataSource" class="net.sf.log4jdbc.Log4jdbcProxyDataSource"> 
+		<constructor-arg ref="dataSourceSpied" /> 
+		<property name="logFormatter">
+			<bean class="net.sf.log4jdbc.tools.Log4JdbcCustomFormatter"> 
+				<property name="loggingType" value="MULTI_LINE" /> 
+				<property name="sqlPrefix" value="SQL : "/> 
+			</bean> 
+		</property> 
+	</bean>
+	-->
+
+</beans>

@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:context="http://www.springframework.org/schema/context" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd">
+
+	<!-- DispatcherServlet과 관련된 설정을 합니다. Web Application에서 클라이언트의 요청을 받기 위한 
+		설정을 주로 하는 곳으로 View와 관련된 Bean(Controller)을 등록하거나 MulitipartResolver와 같은 설정을 
+		합니다. 
+	-->
+	
+	
+	<!-- Controller Bean Loading -->
+	<context:component-scan base-package="web">
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service" />
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Repository" />
+	</context:component-scan>
+	
+	<!-- AOP 로딩  -->
+	<aop:aspectj-autoproxy />
+
+
+	<!-- Enables the Spring MVC @Controller programming model -->
+	<!-- <mvc:annotation-driven /> -->
+	<mvc:annotation-driven> 
+		<mvc:message-converters> 
+			<!-- @ResponseBody로 String 처리 --> 
+			<bean class="org.springframework.http.converter.StringHttpMessageConverter"> 
+				<property name="supportedMediaTypes"> 
+					<list> 
+						<value>text/html;charset=UTF-8</value> 
+					</list> 
+				</property> 
+			</bean> 
+			<!-- @ResponseBody로 json 처리 -->
+			<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+				<property name="supportedMediaTypes">
+					<list>
+						<value>application/json;charset=UTF-8</value>
+					</list>
+				</property>
+			</bean>
+		</mvc:message-converters> 
+	</mvc:annotation-driven>
+
+
+	<!-- default-servlet-handler를 사용할 경우 resources를 대체할 수 있습니다. -->
+	<mvc:default-servlet-handler />
+	
+	
+	<!-- Interceptor 설정 -->
+<!-- 	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/cmn/session/lang" />
+			<bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+			    <property name="paramName" value="lang" />
+			</bean>	 
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/api/**" />			
+			<mvc:exclude-mapping path="/cmn/error/**"/>
+			<mvc:exclude-mapping path="/api/user/**"/>			
+			<mvc:exclude-mapping path="/api/certify/**"/>
+			<mvc:exclude-mapping path="/api/usermgmt/userStt/userSttInsert"/>
+			<mvc:exclude-mapping path="/api/usermgmt/userStt/userPwReset"/>
+			<mvc:exclude-mapping path="/api/polMgmt/pwPolMgmt/info"/>
+			<mvc:exclude-mapping path="/api/system/uclm/biz/allContInfo"/>
+			<mvc:exclude-mapping path="/api/usermgmt/userStt/userOtpUserAuth"/>
+			<mvc:exclude-mapping path="/api/system/codeMng/**"/>	
+			<mvc:exclude-mapping path="/api/usermgmt/userStt/userPwChg"/>
+			<mvc:exclude-mapping path="/api/usermgmt/userStt/userCheck"/>		
+			<mvc:exclude-mapping path="/api/usermgmt/userStt/empCheck"/>
+			<mvc:exclude-mapping path="/api/usermgmt/userStt/userCrtIss"/>
+			<mvc:exclude-mapping path="/api/usermgmt/userStt/exCompList"/>
+			<mvc:exclude-mapping path="/api/usermgmt/userStt/pmList"/>
+			<mvc:exclude-mapping path="/api/usermgmt/userStt/userTypeOption"/>
+			<mvc:exclude-mapping path="/api/duty/**"/>	
+			
+			
+			
+			
+			
+			
+			<bean id="LoginInterceptor" class="kr.co.ensecure.web.base.interceptor.LoginInterceptor"></bean>
+		</mvc:interceptor>
+		 <mvc:interceptor>
+			<mvc:mapping path="/**"/>
+			<mvc:exclude-mapping path="/login"/>
+			<mvc:exclude-mapping path="/ws/sample/websocket"/>
+			<bean id="LoginInterceptor" class="kr.co.ensecure.web.base.interceptor.LoginInterceptor"></bean>
+		</mvc:interceptor>
+	</mvc:interceptors> -->
+	
+
+
+	<!-- 
+		* ContentNegotiatingViewResolver 
+		- 뷰 이름으로부터 직접 뷰 오브젝트를 찾지 않습니다. 
+	    - 미디어타입(mediaType)의 정보를 통해 다른 적절한 뷰 리졸버를 찾아서 리턴해줍니다. 
+	      (뷰 리졸버를 결정해주는 뷰 리졸버?) 
+	    - 미디어타입은 HTTP의 콘텐트 타입(Content-Type)에 대응됩니다. (xml, json 등) 
+	    - 이 뷰 리졸버가 적절한 뷰 리졸버를 찾기 위해 request의 contentsType의 mediaType 형태를 파악합니다. 
+	      -> 1. URL 확장자에서 찾는 방법 /hello.html -> html 타입, /hello.json -> json 타입 
+	      -> 2. 포맷을 지정하는 파라미터에서 찾는 방법 /hello?format=pdf -> pdf 타입 
+	      -> 3. HTTP의 콘텐트 교섭에 사용되는 Accept Header의 설정을 이용해서 찾는 방법 
+	            위의 두 방법으로 못찾았을 때 사용됩니다. -> defaultContentType 프로퍼티를 통해 설정된 
+	            미디어 타입을 사용합니다. 
+	    - 뷰 리졸버는 ViewResolvers 프로퍼티에 정의합니다. 
+	      -> defaultViews 프로퍼티를 이용해 기본 뷰를 등록해줘야 합니다. 안 하면 Servlet Context에 등록된 ViewResolver 타입의 빈을 모두 찾아서 사용하게 됨 
+	    - order 우선순위를 따르지 않고 모든 뷰 리졸버들 중 해당 요청을 처리할 수 있는 타입을 찾아서 반환할 뷰를 결정합니다. 
+    -->
+	<bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+		<property name="contentNegotiationManager" ref="contentNegotiationManager" />
+		<property name="viewResolvers">
+			<list>
+				<bean class="org.springframework.web.servlet.view.BeanNameViewResolver" />
+				<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+					<property name="prefix" value="/WEB-INF/jsp/" />
+					<property name="suffix" value=".jsp" />
+				</bean>
+			</list>
+		</property>
+		<!-- 위의 viewResolvers가 View를 얻지 못할 경우에는 defaultView를 사용합니다. 
+			MappingJackson2JsonView는 ModelAndView를 json 형식으로 바꿔서 뷰 대신 리턴해줍니다. 
+			만약 xml을 추가해서 사용할 거면 ...view.xml.MarshallingView를 사용하시면 됩니다. -->
+		<property name="defaultViews">
+			<list>
+				<bean class="org.springframework.web.servlet.view.json.MappingJackson2JsonView">				
+					<property name="contentType" value="application/json;charset=UTF-8"> </property>
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<!-- ContentNegotiatingViewResolver 내 mediaType 프로퍼티를 더이상 사용할 수 없으므로(3.2.x부터) 
+		아래의 contentNegotiationManager로 대신합니다. 샘플 프로젝트의 경우 외부로 뺐으나 위의 contentNegotiationManager 태그에 종속시켜도 무관합니다. -->
+	<bean id="contentNegotiationManager" class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
+		<property name="favorPathExtension" value="false" />
+		<property name="favorParameter" value="true" />
+		<property name="mediaTypes">
+			<value>
+				json=application/json
+				xml=application/xml
+				html=text/html
+				atom=application/atom+xml
+			</value>
+		</property>
+	</bean>
+	
+	
+	<!-- MultipartResolver 설정 -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+    	<!-- 단위 Byte (50MB) -->
+    	<property name="maxUploadSize" value="52428800" />
+        <property name="maxInMemorySize" value="52428800" />
+    </bean>
+
+
+	<!-- view-controller 설정
+		포워딩 별도의 모델이나 컨트롤러 없이 URL 요청이 왔을때 뷰로 연결만 해주는 경우 사용.
+				
+		<mvc:view-controller path="/" view-name="forward:/resources/index.html"/>
+		=> index 페이지로 포워드
+		
+		<mvc:view-controller path="/" view-name="redirect:https://www.ensecure.co.kr/"/>
+		=> 외부 페이지로 리다이렉트
+		
+		<mvc:view-controller path="/login" view-name="login"/>
+		=> 로그인 jsp로 연결
+	-->
+	<!-- <mvc:view-controller path="/" view-name="forward:/resources/index.html"/> -->
+	<!-- <mvc:view-controller path="/" view-name="forward:/sample/SampleTest.html"/> -->
+	
+	
+	<!-- 정적파일 URL 접근 매핑 설정 -->
+	<mvc:resources location="/resources/**" mapping="/resources"/>
+	
+	<!-- manual config path -->
+	<util:list id="fileDownloadConfig" list-class="java.util.ArrayList">
+		<value>/manual</value>
+		<value>UserGuide</value>
+		<value>.pdf</value>
+	</util:list>
+
+</beans>
+
+

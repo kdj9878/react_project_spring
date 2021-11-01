@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:tx="http://www.springframework.org/schema/tx"
+	   xmlns:aop="http://www.springframework.org/schema/aop"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	   					   http://www.springframework.org/schema/beans/spring-beans.xsd
+    					   http://www.springframework.org/schema/tx
+    					   http://www.springframework.org/schema/tx/spring-tx.xsd
+    					   http://www.springframework.org/schema/aop
+    					   http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<!-- Transaction Manager 설정
+		 DB Transaction 처리에 관한 설정을한다.
+		 어노테이션을 사용하여 적용 시키거나, AOP를 사용하여 직접 설정할 수 있다.
+		 아래는 어노테이션을 사용하여 적용. 
+	-->
+
+
+	<!-- TxManager 생성 -->
+	<bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	
+	<bean id="adminTxManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="adminDataSource"/>
+	</bean>
+	
+	
+	<!-- Tx 어노테이션 로딩 -->
+	<!-- 사용법
+		 @Transactional 어노테이션을  클래스나 메소드에 명시해주면된다.
+		 이 프로젝트에서는 @Transactional을 상속받은
+		 @Transaction 인터페이스를 사용하여 적용.		 
+	-->
+	<tx:annotation-driven transaction-manager="txManager"/>
+	<tx:annotation-driven transaction-manager="adminTxManager"/>
+	
+	
+	<!-- Tx Aop를 직접 설정할 경우 아래와같이 설정 -->
+	<!--
+	<aop:config>
+		<aop:pointcut id="requiredTx" expression="execution(* kr.co.ensecure..service.*Service.*(..))"/>
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="requiredTx" />
+	</aop:config>
+	
+	<tx:advice id="txAdvice" transaction-manager="txManager">
+		<tx:attributes>
+			<tx:method name="insert*" rollback-for="Exception"/>
+			<tx:method name="delete*" rollback-for="Exception"/>
+			<tx:method name="update*" rollback-for="Exception"/>
+		</tx:attributes>
+	</tx:advice>
+	-->
+</beans>

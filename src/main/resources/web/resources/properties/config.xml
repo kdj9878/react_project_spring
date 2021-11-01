@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<comment>Configuration properties</comment>
+
+	<entry key="config.sample">Sampel Config</entry>
+
+	<!-- Database Config -->
+	<!-- MariaDB -->
+	
+	<entry key="db1.driver">org.mariadb.jdbc.Driver</entry>
+	 <entry key="db1.url">jdbc:mariadb://localhost:3306/practice</entry>
+	<entry key="db1.username">kdj9878</entry>
+	<entry key="db1.password">1234</entry> 
+	<!-- <entry key="db1.url">jdbc:mariadb://10.10.20.45:3306/eNgen_Work?allowMultiQueries=true</entry>
+	<entry key="db1.username">portaladmin</entry>
+	<entry key="db1.password">imsi00..!!</entry> -->
+	<entry key="db1.initialSize">5</entry>
+	<entry key="db1.maxTotal">20</entry>
+	<entry key="db1.maxIdle">20</entry>	
+	<entry key="db1.minIdle">20</entry>
+	
+	<entry key="db2.driver">org.mariadb.jdbc.Driver</entry>
+	<!-- <entry key="db1.url">jdbc:mariadb://10.10.20.45:3306/imdb</entry>
+	<entry key="db1.username">root</entry>
+	<entry key="db1.password">imsi00.!</entry> --> 
+	<entry key="db2.url">jdbc:mariadb://10.10.20.45:3306/eNgen_Admin?allowMultiQueries=true</entry>
+	<entry key="db2.username">portaladmin</entry>
+	<entry key="db2.password">imsi00..!!</entry>
+	<entry key="db2.initialSize">5</entry>
+	<entry key="db2.maxTotal">20</entry>
+	<entry key="db2.maxIdle">20</entry>	
+	<entry key="db2.minIdle">20</entry>
+	
+	<!-- MSSQL -->
+	<!-- 
+	<entry key="db1.driver">com.microsoft.sqlserver.jdbc.SQLServerDriver</entry>
+	<entry key="db1.url">jdbc:sqlserver://10.10.20.12:1433;databaseName=engenim_db_01</entry>
+	<entry key="db1.username">engenim_user_01</entry>
+	<entry key="db1.password">qwer</entry>
+	<entry key="db1.initialSize">5</entry>
+	<entry key="db1.maxTotal">20</entry>
+	<entry key="db1.maxIdle">20</entry>	
+	<entry key="db1.minIdle">20</entry>
+	-->
+	
+	<!-- Mail Config -->
+	<entry key="mail1.serverip">211.234.116.170</entry>
+	<entry key="mail1.port">25</entry>
+	<entry key="mail1.domain">mail.ensecure.co.kr</entry>
+	<entry key="mail1.sender">imadmin@ensecure.co.kr</entry>
+	<entry key="mail1.password">imadmin1!</entry>
+	<entry key="mail1.senderName">eNgenIM 포탈 관리자</entry>
+	<entry key="mail1.dir"></entry>
+	<entry key="mail1.iss">true</entry>
+	
+	<!-- SMS config (임시로 다른 호스팅 주소 사용) -->
+	<entry key="sms1.apikey">NCSG0EWHCTR3XFUH</entry>
+	<entry key="sms1.apisecret">SCAMESOFM2ETUJQBPYFDYEPTJBABVHHZ</entry>
+	<entry key="sms1.apifrom">01096073221</entry>
+	
+	<!-- OTP config  -->
+	<entry key="otp1.domain">ensecure.co.kr</entry>
+	<!-- <entry key="otp1.format">http://chart.apis.google.com/chart?cht=qr&chs=200x200&chl=otpauth://totp/%s@%s%%3Fsecret%%3D%s&chld=H|0</entry> -->
+	
+	<!-- batch user info -->
+	<entry key="batch.userNo">180</entry>
+	<entry key="batch.userNm">배치관리자</entry>
+	<entry key="batch.userId">batch</entry>
+	<entry key="batch.email">imadmin@ensecure.co.kr</entry>
+	<entry key="batch.ponNum">02-0000-0000</entry>
+	
+	<entry key="domain.name"></entry>
+	
+	<!-- gate on info -->
+	<entry key="gateon.url">10.10.10.100</entry>
+	
+	<!-- Hosts File Config -->
+	<entry key="hosts.path">C:\Windows\System32\drivers\etc\hosts</entry>
+	
+</properties>

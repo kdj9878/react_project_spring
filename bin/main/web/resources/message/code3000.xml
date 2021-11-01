@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+    <comment>[한글] 자산 관련 코드 메시지</comment>
+    
+    <entry key="3000">Connection info is not exist.</entry>
+    <entry key="3010">자산 연결상태점검에 실패했습니다.</entry>
+    <entry key="3020">자산 계정그룹 동기화에 실패했습니다.</entry>
+    <entry key="3021">Failed to insert synchronized account group information.</entry>
+    <entry key="3030">자산 계정 동기화에 실패했습니다.</entry>
+    <entry key="3031">Failed to insert synchronized account information.</entry>
+    <entry key="3032">자산의 호스트 서버 계정 동기화에 실패했습니다.</entry>
+    <entry key="3033">Failed to insert synchronized host server account information.</entry>
+    <entry key="3040">자산 DB/Tablsespace 동기화에 실패했습니다.</entry>
+    <entry key="3042">자산 DB/Tablsespace 동기화 대상이 아닙니다.</entry>
+    <entry key="3050">자산 권한 그룹(Role) 동기화에 실패했습니다.</entry>
+    <entry key="3052">자산 권한 그룹(Role) 동기화 대상이 아닙니다.</entry>
+    <entry key="3060">자산 시스템 권한(Privilege) 동기화에 실패했습니다.</entry>
+    <entry key="3062">자산 시스템 권한(Privilege) 동기화 대상이 아닙니다.</entry>
+    <entry key="3070">자산 등록에 실패했습니다.</entry>
+    <entry key="3071">Failed to create asset information.</entry>
+    <entry key="3080">자산 수정에 실패했습니다.</entry>
+    <entry key="3081">Failed to update asset information.</entry>
+    <entry key="3090">자산 삭제에 실패했습니다.</entry>
+    <entry key="3091">Failed to delete asset information.</entry>
+    <entry key="3092">DB2 자산의 호스트 서버로 등록된 OS 자산은 삭제 대상이 아닙니다.</entry>
+    <entry key="3100">자산 계정 그룹 등록에 실패했습니다.</entry>
+    <entry key="3101">Failed to create asset account group information.</entry>
+    <entry key="3110">자산 Profile 동기화에 실패했습니다.</entry>
+    <entry key="3112">자산 Profile 동기화 대상이 아닙니다.</entry>
+    <entry key="3120">자산 시스템 역할(Authority) 동기화에 실패했습니다.</entry>
+    <entry key="3122">자산 시스템 역할(Authority) 동기화 대상이 아닙니다.</entry>
+</properties>

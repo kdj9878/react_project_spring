@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+    <comment>[한글] 계정 관련 코드 메시지</comment>
+    
+    <entry key="2000">{0} 계정은 잠금이 불가능합니다.</entry>
+    <entry key="2001">{0} 계정은 잠금해제가 불가능합니다.</entry>
+    <entry key="2002">{0} 계정은 비밀번호 변경이 불가능합니다.</entry>
+    <entry key="2003">{0} 계정은 등록이 불가능한 비정상 계정입니다.</entry>
+    <entry key="2004">삭제 대기 계정은 Lock 해제만 가능합니다.</entry>
+    <entry key="2005">프로토콜이 있는 계정은 삭제가 불가능합니다.</entry>
+    <entry key="2006">삭제처리가 완료된 계정입니다.</entry>
+    <entry key="2007">{0} 계정은 비밀번호 변경 횟수 초과로  비밀번호 변경이 불가능합니다.</entry>
+    <entry key="2008">{0} 계정은 비밀번호 변경 임계 횟수내에 동일한 비밀번호 변경이 불가능합니다.</entry>
+</properties>

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN" monitorInterval="5">
+    
+    <Scripts>
+		<Script name="selector" language="javascript"><![CDATA[
+	        var result = null;
+	        if (logEvent.getLoggerName().indexOf("log4jdbc.log4j2", 0) !== -1) {
+				result = "Log4jdbc";
+            } else if (logEvent.getLoggerName().indexOf("mybatis.mapper", 0) !== -1) {
+                result = "Mybatis";
+            } else if (logEvent.getLoggerName().indexOf("kr.co.ensecure.web.base.mybatis.interceptor.MybatisLogInterceptor", 0) !== -1) {
+                result = "MybatisInter";
+            }
+	        result;
+	      ]]></Script>
+	</Scripts>
+    
+    
+    <!-- 
+    	Log4j Pattern Option
+    	- 시간 출력    : %d{HH:mm:ss.SSS}
+    	- 레벨 출력    :  %p{length=5}(유동자리수) 또는 %-5level(고정자리수)
+    	- 스레드 출력 : %t
+    	- 변수 출력    : %X{key} ==> Filter 구현해야함.
+    	- 카테고리     : %c{n.}
+    	- 메소드 출력 : %M
+    	- 라인 출력    : %L
+    	- 메시지 출력 : %m
+    	- 개행문자     : %n
+     -->
+    <Appenders>
+    	<Console name="Console" target="SYSTEM_OUT">
+    		<PatternLayout>
+				<ScriptPatternSelector defaultPattern="[%d{HH:mm:ss.SSS}] [%-5level] [%t] %c{1.}.%M:%L | %m%n">
+					<ScriptRef ref="selector" />
+					<PatternMatch key="Log4jdbc" pattern="[%d{HH:mm:ss.SSS}] %-5level [%t] %n%m%n" />
+					<PatternMatch key="Mybatis" pattern="[%d{HH:mm:ss.SSS}] %-5level [%t] %c{-2} %m%n" />
+					<PatternMatch key="MybatisInter" pattern="[%d{HH:mm:ss.SSS}] %-5level [%t] %m%n" />
+				</ScriptPatternSelector>
+			</PatternLayout>
+    	</Console>
+    	<RollingFile name="RollingFile" fileName="${main:logRootPath}/web.log" filePattern="${main:logRootPath}/old/web_%d{yyyy-MM-dd}.%i.log">
+    		<PatternLayout>
+				<ScriptPatternSelector defaultPattern="[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%t] %-5p %c{1.}.%M:%L | %m%n">
+					<ScriptRef ref="selector" />
+					<PatternMatch key="Log4jdbc" pattern="[%d{yyyy-MM-dd HH:mm:ss.SSS}] %-5level [%t] %n%m%n" />
+					<PatternMatch key="Mybatis" pattern="[%d{yyyy-MM-dd HH:mm:ss.SSS}] %-5level [%t] %c{-2} %m%n" />
+					<PatternMatch key="MybatisInter" pattern="[%d{yyyy-MM-dd HH:mm:ss.SSS}] %-5level [%t] %m%n" />
+				</ScriptPatternSelector>
+			</PatternLayout>
+			<Policies>
+				<SizeBasedTriggeringPolicy size="10MB" />
+				<TimeBasedTriggeringPolicy />
+			</Policies>
+			<DefaultRolloverStrategy max="10">
+				<Delete basePath="${main:logRootPath}/web_bak" maxDepth="1">
+					<IfFileName glob="web_*.log">
+						<IfAny>
+							<IfLastModified age="P90D" />
+							<IfAccumulatedFileSize exceeds="2GB" />
+							<IfAccumulatedFileCount exceeds="1000" />
+						</IfAny>
+					</IfFileName>
+				</Delete>
+			</DefaultRolloverStrategy>
+    	</RollingFile>
+    	<RollingFile name="EventRollingFile" fileName="${main:logRootPath}/event.log" filePattern="${main:logRootPath}/old/event_%d{yyyy-MM-dd}.%i.log">
+    		<PatternLayout pattern="[%d{yyyy-MM-dd HH:mm:ss.SSS}] %m%n" />
+			<Policies>
+				<SizeBasedTriggeringPolicy size="10MB" />
+				<TimeBasedTriggeringPolicy />
+			</Policies>
+			<DefaultRolloverStrategy max="10">
+				<Delete basePath="${main:logRootPath}/event_bak" maxDepth="1">
+					<IfFileName glob="event_*.log">
+						<IfAny>
+							<IfLastModified age="P90D" />
+							<IfAccumulatedFileSize exceeds="2GB" />
+							<IfAccumulatedFileCount exceeds="1000" />
+						</IfAny>
+					</IfFileName>
+				</Delete>
+			</DefaultRolloverStrategy>
+    	</RollingFile>
+    </Appenders>
+    
+    <Loggers>
+    	<Logger name="org.springframework" level="INFO" />
+    	<Logger name="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping" level="TRACE" />
+		<Logger name="org.mybatis.spring" level="INFO" />
+		<Logger name="org.apache" level="INFO" />
+		<Logger name="org.apache.axis" level="INFO" />
+		<Logger name="org.hibernate" level="INFO" />
+	
+		<Logger name="java.sql.Connection" level="WARN" />
+		<Logger name="java.sql.Statement" level="WARN" />
+		<Logger name="java.sql.PreparedStatement" level="WARN" />
+		<Logger name="java.sql.ResultSet" level="WARN" />
+		
+		<logger name="mybatis.mapper" level="DEBUG" />
+		<Logger name="log4jdbc.debug" level="INFO" />
+		<Logger name="log4jdbc.log4j2" level="OFF">
+			<Filters>
+				<MarkerFilter marker="LOG4JDBC_JDBC" onMatch="DENY" onMismatch="NEUTRAL" />
+				<MarkerFilter marker="LOG4JDBC_CONNECTION" onMatch="DENY" onMismatch="NEUTRAL" />
+			</Filters>
+		</Logger>
+		
+		<logger name="kr.co.ensecure.enrel" level="DEBUG" />
+		
+		<logger name="kr.co.ensecure.web.base.util.message.EventLogUtil">
+			<AppenderRef ref="EventRollingFile"/>
+		</logger>
+		
+		<Root level="DEBUG">
+			<AppenderRef ref="Console" />
+			<AppenderRef ref="RollingFile" />
+		</Root>
+		
+    </Loggers>
+    
+</Configuration>

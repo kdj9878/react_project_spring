@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+    <comment>[영문] 대시보드 관련 코드 메시지</comment>
+    
+    <entry key="1000"></entry>
+</properties>

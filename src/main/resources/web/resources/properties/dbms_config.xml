@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<comment>DBMS Properties</comment>
+	
+	<entry key="dbms.jdbc.driver.ora">oracle.jdbc.driver.OracleDriver</entry>
+	<entry key="dbms.jdbc.driver.sql">com.microsoft.sqlserver.jdbc.SQLServerDriver</entry>
+	<entry key="dbms.jdbc.driver.db2">com.ibm.db2.jcc.DB2Driver</entry>
+	
+	<entry key="dbms.execute.dao.ora">kr.co.ensecure.web.product.engenim.db.dbms.dao.DbmsOracleDao</entry>
+	<entry key="dbms.execute.dao.sql">kr.co.ensecure.web.product.engenim.db.dbms.dao.DbmsMssqlDao</entry>
+	<entry key="dbms.execute.dao.db2">kr.co.ensecure.web.product.engenim.db.dbms.dao.DbmsDb2Dao</entry>
+</properties>

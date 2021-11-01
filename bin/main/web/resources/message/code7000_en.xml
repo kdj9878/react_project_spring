@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+    <comment>[영문] 사용자 관련 코드 메시지</comment>
+    
+    <entry key="7000"></entry>
+    <entry key="7001">Please delete all users registered in the detailed job and try again.</entry>
+</properties>

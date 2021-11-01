@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+    <comment>[영문] 자산 관련 코드 메시지</comment>
+    
+    <entry key="3000">Connection info is not exist.</entry> 
+    <entry key="3100">Asset connection status check failed.</entry>    
+    <entry key="3200">Asset account group synchronization failed.</entry>    
+    <entry key="3201">Failed to insert synchronized account group information.</entry> 
+    <entry key="3300">Asset account synchronization failed.</entry> 
+    <entry key="3301">Failed to insert synchronized account information.</entry>
+    <entry key="3400">Asset database synchronization failed.</entry> 
+    <entry key="3500">Asset auth synchronization failed.</entry> 
+</properties>

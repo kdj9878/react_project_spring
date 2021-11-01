@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	   					   http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- MyBatis 설정
+		 MyBatis 설정에 관련된 Bean들을 생성하고, 옵션을 설정한다. 
+	-->
+
+
+	<!-- CamelCase Wrapper -->
+	<!-- ResultSet의 컬럼명을 CamelCase로 변경하는 Custom class -->
+  	<bean id="objectWrapperFactory" class="web.base.mybatis.convert.CamelMapObjectWrapperFactory" />
+ 
+
+	<!-- Work Database Configuration -->
+	<!-- sqlSession 생성-->
+	<!-- dataSource를 연결하고, MyBatis Config와 Mapper의 위치를 설정한다. 또한 위에서 생성한 Wrapper를 설정한다. -->
+ 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation" value="classpath:/web/resources/mybatis/mybatis-config.xml" />
+		<property name="mapperLocations" value="classpath*:/web/**/mapper/*.xml" />
+		<!-- Wrapper -->
+		<property name="objectWrapperFactory" ref="objectWrapperFactory" />
+	</bean> 
+	
+	<!-- sqlSessionTemplate 생성 -->
+	<!-- sqlSessionFactory를 직접 다루는 것을 방지하고, jdbc코딩을 해주는 mybtis 라이브러리 -->
+ 	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache" primary="true">
+		<constructor-arg index="0" ref="sqlSession" />
+	</bean>
+	
+	<!-- scan for mappers and let them be autowired -->
+     <bean id="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="web" />
+        <property name="sqlSessionFactoryBeanName" value="sqlSession"></property>
+    </bean>
+	
+	
+	
+	<!-- Admin Database Configuration -->
+	<!-- sqlSession 생성-->
+<!-- 	<bean id="adminSqlSession" name="adminSqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="adminDataSource" />
+		<property name="configLocation" value="classpath:/kr/co/ensecure/web/resources/mybatis/mybatis-config.xml" />
+		<property name="mapperLocations" value="classpath*:/kr/co/ensecure/web/**/mapper/*.xml" />
+		Wrapper
+		<property name="objectWrapperFactory" ref="objectWrapperFactory" />
+	</bean>
+	
+	sqlSessionTemplate 생성
+	<bean id="adminSqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache">
+		<constructor-arg index="0" ref="adminSqlSession" />
+	</bean> -->
+	
+	<!-- scan for mappers and let them be autowired -->
+    <!-- Work DB 매퍼 스케너가 전체 패키지를 스캔하기때문에 적용 되지 않음. Admin DB 사용시 DAO 클래스를 만들어서 지정해야함
+    	-> SampleDao.java 17~19 Line
+    <bean id="adminMapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="kr.co.ensecure.web" />
+        <property name="sqlSessionFactoryBeanName" value="adminSqlSession"></property>
+    </bean>
+	 -->
+	
+</beans>

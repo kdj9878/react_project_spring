@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<settings>
+		<setting name="mapUnderscoreToCamelCase" value="true" />
+		<setting name="callSettersOnNulls" value="true" />
+		<setting name="jdbcTypeForNull" value="NULL" />
+		<setting name="logPrefix" value="mybatis.mapper."/>
+		<setting name="localCacheScope" value="STATEMENT"/>
+	</settings>
+	<typeAliases>
+		<typeAlias alias="JsonTypeHandler" type="kr.co.ensecure.web.base.mybatis.typehandler.JsonTypeHandler" />
+	</typeAliases>
+	<plugins>
+		<!-- 쿼리 실행 시 쿼리와 결과를 로깅하는 Custom Class -->
+		<plugin interceptor="kr.co.ensecure.web.base.mybatis.interceptor.MybatisLogInterceptor" />
+	</plugins>
+</configuration>
