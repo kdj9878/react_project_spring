@@ -1,11 +1,19 @@
 package web.rest.account.controller;
 
 
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import web.rest.account.service.UserService;
 
 @RestController
 @RequestMapping(value = "api/user")
@@ -13,13 +21,15 @@ public class AccController {
 
 	private static final Logger log = LoggerFactory.getLogger(AccController.class);
 	
-	@GetMapping(value = "/login")
-	public String MainController() {
+	@Autowired
+	private UserService userService;
+	
+	@PostMapping(value = "login")
+	public int MainController(HttpServletRequest request, @RequestBody Map<String, Object> param) {
 		
-		String value = "연결 성공";
-		log.info("연결 됨");
+		userService.searchUserById(param);
 		
-		return value;
+		return 1;
 	}
 	
 	
