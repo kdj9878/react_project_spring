@@ -24,10 +24,10 @@ public class AccController {
 	@Autowired
 	private UserService userService;
 	
-	@PostMapping(value = "login")
+	@PostMapping(value = "/login")
 	public int MainController(HttpServletRequest request, @RequestBody Map<String, Object> param) {
 		
-		userService.searchUserById(param);
+//		userService.searchUserById(param);
 		
 		return 1;
 	}
