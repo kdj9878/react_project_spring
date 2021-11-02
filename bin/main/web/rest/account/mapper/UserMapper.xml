@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="web.rest.account.dao.UserDao">
+
+	<!-- 로그인 시 입력 아이디로 유저 조회 -->
+	<select id="searchUserById" parameterType="hashmap" resultType="hashmap">
+	select
+	 	 A.USER_ID as userId,
+		 A.USER_NAME as userName, 
+		 A.USER_PW as userPw, 
+		 A.USER_PH as userPh, 
+		 A.USER_RM as userRm
+	from pra_user A
+	 where A.USER_NAME = #{userId} 
+	</select>
+	
+	  
+	
+	
+
+</mapper>
