@@ -1,6 +1,7 @@
 package web.rest.account.controller;
 
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -30,6 +31,10 @@ public class AccController {
 	@Autowired
 	private UserService userService;
 	
+	
+	/*	로그인 시 실행되는 메소드
+	 * 	/api/user/login
+	 */
 	@PostMapping(value = "/login")
 	@ResponseBody
 	public Map<String, Object> MainController(HttpServletRequest request, @RequestBody Map<String, Object> param) {
@@ -37,18 +42,21 @@ public class AccController {
 		 * @requestBody
 		 * json 데이터를 java object로 자동으로 변환해준다.
 		 * 사용하기 위해서는 기본생성자와 getter 혹은 setter가 필요하다.
+		 * 하지만 여기서는 Map에 바로 넣기 위해서 처음부터 객체 형태로 전송
 		 */
 
 		return userService.searchUserById(param);
 	}
 	
-	@GetMapping(value = "/get")
+	
+	/*
+	 * 유저 리스트를 가져오는 메소드
+	 *	/api/user/list
+	 */
+	@GetMapping(value = "/list")
 	@ResponseBody
-	public String getRuqeust(@RequestParam(value = "id") String id) {
-		
-		
-		
-		return id;
+	public List<Map<String, Object>> getRuqeust(HttpServletRequest request) {
+		return userService.getUserList();
 	}
 	
 	

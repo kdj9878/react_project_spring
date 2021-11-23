@@ -1,5 +1,6 @@
 package web.rest.account.service;
 
+import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -19,14 +20,22 @@ public class UserService {
 	private UserDao userDao;
 	
 	public Map<String, Object> searchUserById(Map<String, Object> param) {
-		Map<String, Object> what = userDao.searchUserById(param);
+		Map<String, Object> userInfo = userDao.searchUserById(param);
 		
 		
 		
 		
+		return userInfo;
+		
+	}
+
+	public List<Map<String, Object>> getUserList() {
 		
 		
-		return what;
+		List<Map<String, Object>> userList = userDao.getUserList();
+		
+		return userList;
+		
 		
 	}
 	
