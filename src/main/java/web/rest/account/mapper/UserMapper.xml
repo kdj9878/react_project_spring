@@ -15,37 +15,52 @@
 	</select>
 	
 	<select id="getUserList" parameterType="hashmap" resultType="hashmap">
-		with ACC_DEPT as (	/* 사원의 부서와 팀 이름 가져오는 with절 */
-	select
-		 VT1.USER_ID
-		,VT2.DEPT_NM		/* 부서 이름 */
-		,VT3.DEPT_DT_NM		/* 팀 이름 */
-	from acc_dept_mnt VT1
-	left outer join dept_code_mnt VT2
-	on VT1.ACC_DEPT_CODE = VT2.DEPT_NO
-	left outer join dept_dt_code_mnt VT3
-	on VT1.ACC_DEPT_DT_CODE = VT3.DEPT_DT_CODE 
+	with ACC_DEPT as (	/* 사원의 부서와 팀 이름 가져오는 with절 */
+		select
+			 VT1.USER_ID
+			,VT2.DEPT_NM		/* 부서 이름 */
+			,VT3.DEPT_DT_NM		/* 팀 이름 */
+		from acc_dept_mnt VT1
+		left outer join dept_code_mnt VT2
+		on VT1.ACC_DEPT_CODE = VT2.DEPT_NO
+		left outer join dept_dt_code_mnt VT3
+		on VT1.ACC_DEPT_DT_CODE = VT3.DEPT_DT_CODE 
 	)
-	select
-		T1.USER_ID			/* 사원 고유 번호 */
-		,T1.USER_AUTHOR		/* 사원 권한(사이트에 대한) */
-		,T2.USER_NICKNAME	/* 사원 이름 */
-		,T2.USER_EMAIL		/* 사원 이메일 */
-		,T2.USER_ADDR		/* 사원 주소 */
-		,T2.USER_PH			/* 사원 핸드폰 번호 */
-		,T2.USER_GENDER		/* 사원 성별 */
-		,T2.USER_DESC		/* 사원 자기 소개 */
-		,T3.DEPT_NM			/* 부서 이름 */
-		,T3.DEPT_DT_NM		/* 팀 이름 */
-	from ACC T1
-	left outer join acc_info T2
-	on T1.USER_ID = T2.USER_ID
-	left outer join ACC_DEPT T3
-	on T1.USER_ID = T3.USER_ID
+		select
+			T1.USER_ID			/* 사원 고유 번호 */
+			,T1.USER_AUTHOR		/* 사원 권한(사이트에 대한) */
+			,T2.USER_NICKNAME	/* 사원 이름 */
+			,T2.USER_EMAIL		/* 사원 이메일 */
+			,T2.USER_ADDR		/* 사원 주소 */
+			,T2.USER_PH			/* 사원 핸드폰 번호 */
+			,T2.USER_GENDER		/* 사원 성별 */
+			,T2.USER_DESC		/* 사원 자기 소개 */
+			,T3.DEPT_NM			/* 부서 이름 */
+			,T3.DEPT_DT_NM		/* 팀 이름 */
+		from ACC T1
+		left outer join acc_info T2
+		on T1.USER_ID = T2.USER_ID
+		left outer join ACC_DEPT T3
+		on T1.USER_ID = T3.USER_ID
 	</select>
 	
-	  
-	
-	
+	<update id="modUserInfo" parameterType="hashmap">
+	UPDATE ACC_INFO
+		<set>
+		<if test="userNickNameValue != null and !userNickNameValue.equals('')">
+			USER_NICKNAME = #{userNickNameValue},
+		</if>
+		<if test="userEmailValue != null and !userEmailValue.equals('')">
+			USER_EMAIL = #{userEmailValue},
+		</if>
+		<if test="userPhValue != null and !userPhValue.equals('')">
+			USER_PH = #{userPhValue},
+		</if>
+		<if test="userAddrValue != null and !userAddrValue.equals('')">
+			USER_ADDR = #{userAddrValue}
+		</if>
+		</set>
+	WHERE USER_ID = #{userId}
+	</update>
 
 </mapper>

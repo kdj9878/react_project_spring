@@ -21,24 +21,20 @@ public class UserService {
 	
 	public Map<String, Object> searchUserById(Map<String, Object> param) {
 		Map<String, Object> userInfo = userDao.searchUserById(param);
-		
-		
-		
-		
 		return userInfo;
 		
 	}
 
 	public List<Map<String, Object>> getUserList() {
-		
-		
 		List<Map<String, Object>> userList = userDao.getUserList();
-		
+		return userList;
+	}
+
+	public List<Map<String, Object>> modUserInfo(Map<String, Object> params) {
+		userDao.modUserInfo(params);
+		List<Map<String, Object>> userList = userDao.getUserList();
 		return userList;
 		
 		
 	}
-	
-	
-	
 }
