@@ -3,8 +3,8 @@ package web.rest.common.dao;
 import java.util.List;
 import java.util.Map;
 
-public interface DetpMntDao {
+public interface DeptMntDao {
 
-	List<Map<String, Object>> getDetpList();
+	public List<Map<String, Object>> getDeptList();
 
 }

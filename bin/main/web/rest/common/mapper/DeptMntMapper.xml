@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="web.rest.common.dao.DeptMntDao">
+
+	<select id="getDeptList" parameterType="hashmap" resultType="hashmap">
+	select
+		 T1.DEPT_NO
+		,T1.DEPT_NM
+		,T1.DERMY_COL
+	from dept_code_mnt T1
+	union all
+	select
+		 T2.DEPT_DT_CODE as DEPT_NO
+		,T2.DEPT_DT_NM as DEPT_NM
+		,T2.DEPT_NO as DERMY_COL
+	from dept_dt_code_mnt T2
+	</select>
+
+
+
+
+
+
+</mapper>

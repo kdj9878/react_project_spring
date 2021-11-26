@@ -1,13 +1,11 @@
 package web.rest.account.controller;
 
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +40,6 @@ public class AccController {
 		 * 사용하기 위해서는 기본생성자와 getter 혹은 setter가 필요하다.
 		 * 하지만 여기서는 Map에 바로 넣기 위해서 처음부터 객체 형태로 전송
 		 */
-		System.out.println(param);
 		return userService.searchUserById(param);
 	}
 	
@@ -56,7 +53,10 @@ public class AccController {
 		return userService.getUserList();
 	}
 	
-	
+	/*
+	 * 유저 정보 변경을 위한 메소드
+	 *	/api/user/infoChange
+	 */
 	@PutMapping("/infoChange")
 	public List<Map<String, Object>> modUserInfo(@RequestBody Map<String, Object> params) {
 		return userService.modUserInfo(params);

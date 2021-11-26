@@ -12,6 +12,7 @@ public interface UserDao {
 	//유저 리스트를 가져오는 메소드
 	public List<Map<String, Object>> getUserList();
 
+	//회원 정보 수정 메소드
 	public int modUserInfo(Map<String, Object> params);
 
 

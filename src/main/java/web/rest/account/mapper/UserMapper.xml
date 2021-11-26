@@ -18,6 +18,7 @@
 	with ACC_DEPT as (	/* 사원의 부서와 팀 이름 가져오는 with절 */
 		select
 			 VT1.USER_ID
+			,VT2.DEPT_NO
 			,VT2.DEPT_NM		/* 부서 이름 */
 			,VT3.DEPT_DT_NM		/* 팀 이름 */
 		from acc_dept_mnt VT1
@@ -35,6 +36,7 @@
 			,T2.USER_PH			/* 사원 핸드폰 번호 */
 			,T2.USER_GENDER		/* 사원 성별 */
 			,T2.USER_DESC		/* 사원 자기 소개 */
+			,T3.DEPT_NO
 			,T3.DEPT_NM			/* 부서 이름 */
 			,T3.DEPT_DT_NM		/* 팀 이름 */
 		from ACC T1
@@ -61,6 +63,18 @@
 		</if>
 		</set>
 	WHERE USER_ID = #{userId}
+	
+	UPDATE ACC_DEPT_INFO
+		<set>
+		<if test="deptNo != null and !deptNo.equals('')">
+			ACC_DEPT_CODE = #{deptNo},
+		</if>
+		<if test="deptDtCode != null and !deptDtCode.equals('')">
+			ACC_DEPT_DT_CODE = #{deptDtCode}
+		</if>
+		</set>
+	WHERE USER_ID = #{userId}
+	
 	</update>
 
 </mapper>
